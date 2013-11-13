@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/item_qingliang"
+        android:title="@string/menu_item_qingliang"/>
+
+    <item
+            android:id="@+id/item_jingyan"
+            android:title="@string/menu_item_jingyan"/>
+
+    <item
+            android:id="@+id/item_wenyi"
+            android:title="@string/menu_item_wenyi"/>
+
+    <item
+            android:id="@+id/item_suren"
+            android:title="@string/menu_item_suren"/>
+
+</menu>

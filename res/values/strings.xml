@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Activity titles -->
+    <string name="app_name">性感美女</string>
+    <string name="ac_name_image_list">性感美女</string>
+    <string name="ac_name_image_grid">性感美女</string>
+    <string name="ac_name_image_pager">性感美女</string>
+    <string name="ac_name_image_gallery">性感美女</string>
+    <!-- Labels -->
+    <string name="label_activity_examples">性感美女</string>
+    <string name="menu_item_qingliang">小清新</string>
+    <string name="menu_item_jingyan">热情奔放</string>
+    <string name="menu_item_wenyi">文艺范</string>
+    <string name="menu_item_suren">邻家妹子</string>
+    <string name="button_image_list">性感美女</string>
+    <string name="button_image_grid">性感美女</string>
+    <string name="button_image_pager">性感美女</string>
+    <string name="button_image_gallery">性感美女</string>
+    <!-- Content descriptions -->
+    <string name="descr_image">性感美女</string>
+
+
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="ptr_pull_to_refresh">Pull to refresh</string>
+    <string name="ptr_release_to_refresh">Release to refresh</string>
+    <string name="ptr_refreshing">Refreshing</string>
+    <string name="ptr_last_updated">Updated: %1$s</string>
+
+</resources>

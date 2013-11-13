@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="org.meepo.sexygirl"
+          android:versionCode="35"
+          android:versionName="1.1.0">
+
+    <uses-sdk
+            android:minSdkVersion="5"
+            android:targetSdkVersion="16"/>
+
+    <supports-screens
+            android:smallScreens="true"
+            android:normalScreens="true"
+            android:largeScreens="true"
+            android:resizeable="true"
+            android:anyDensity="true" />
+
+
+    <!-- 必须申明的权限
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS"/>
+     -->
+
+
+    <!-- 添加用户权限 -->
+    <!-- 连接网络权限INTERNET ，用于请求广告(必须) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 读取手机基本信息权限READ_PHONE_STATE，用于精确统计用户的机型等信息(必须) -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 读取网络信息权限ACCESS_NETWORK_STATE，用于识别gprs网络的接入点的情况(必须) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 有助于精准投放地域广告,提高广告与用户的相关性,提高广告点击率 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 为了优化显示和提高效率 -->
+    <!-- 有助于获取投放地域广告,提高广告与用户的相关性,提高广告点击率 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于识别WIFI网络等信息,加快获取广告速度 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 用于LBS定位需要 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+
+    <application
+            android:name=".UILApplication"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar">
+        <meta-data
+                android:name="ZHUAMOB_APPKEY"
+                android:value="624ba660ab6282ee77378359" />
+        <service android:name="com.mj.MjService" />
+        <activity
+                android:name="org.xchu.sexy.MainActivity"
+                android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".ImageGridActivity"
+                android:label="@string/app_name">
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>-->
+        </activity>
+        <activity
+                android:name=".ImagePagerActivity"
+                android:label="@string/ac_name_image_pager"/>
+
+        <!-- Widget -->
+        <receiver android:name=".widget.UILWidgetProvider">
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/widget_provider"/>
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- 注册AppActivity
+        <activity
+                android:name="com.baidu.mobads.AppActivity"
+                android:configChanges="keyboard|keyboardHidden|orientation"/>-->
+        <!-- 您从百度移动联盟网站获取的APPSID
+        <meta-data
+                android:name="BaiduMobAd_APP_ID"
+                android:value="f4dbfd44"/>
+        <meta-data
+                android:name="BaiduMobAd_APP_SEC"
+                android:value="f4dbfd44_13b50d6f"/> -->
+    </application>
+</manifest>

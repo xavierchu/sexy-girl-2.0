@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/universal-image-loader-1.8.7-snapshot-with-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/Baidu_MobAds_SDK_3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/zhuamob_sdk_cnzz_v1.8.2_6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

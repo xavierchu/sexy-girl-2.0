@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                xmlns:baiduadsdk="http://schemas.android.com/apk/res/org.meepo.sexygirl"
+                xmlns:ns="http://mobwin.android.com/apk/res/org.meepo.sexygirl"
+                android:layout_height="fill_parent">
+
+        <com.zhuamob.android.ZhuamobLayout
+                android:id="@+id/mj_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"  />
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                />
+
+        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/gridview"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:gravity="center"
+                  android:horizontalSpacing="4dip"
+                  android:numColumns="2"
+                  android:stretchMode="columnWidth"
+                  android:layout_below="@+id/mj_layout"
+                  android:verticalSpacing="4dip"
+                  android:padding="4dip"/>
+
+        <!-- 注： baiduadsdk:adId可以指定为"",表示默认广告位
+
+        <com.baidu.mobads.AdView
+                android:id="@+id/adView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                baiduadsdk:adSize="0"
+                baiduadsdk:adId="debug_m0000001"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/> -->
+</RelativeLayout>

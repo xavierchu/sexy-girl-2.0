@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:baiduadsdk="http://schemas.android.com/apk/res/org.meepo.sexygirl"
+    tools:context=".MainActivity" >
+
+   	<com.huewu.pla.lib.extra.MultiColumnPullToRefreshListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       />
+<!--
+    <com.baidu.mobads.AdView
+            android:id="@+id/adView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            baiduadsdk:adSize="0"
+            baiduadsdk:adId="debug_m0000001"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>-->
+    
+</RelativeLayout>
