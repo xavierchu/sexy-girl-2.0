@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.huewu.pla.lib.extra.MultiColumnPullToRefreshListView;
 import com.huewu.pla.lib.internal.PLA_AdapterView;
@@ -25,9 +26,11 @@ import org.meepo.sexygirl.ImageUrlsFinder;
 import org.meepo.sexygirl.R;
 import org.xchu.sexy.adapter.WaterfallAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -77,21 +80,18 @@ public class MainActivity extends Activity {
 
         WaterfallAdapter adapter = new WaterfallAdapter(images, MainActivity.this, getWindowManager().getDefaultDisplay());
         waterfallView.setAdapter(adapter);
-        waterfallView.setOnItemClickListener(new PLA_AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(PLA_AdapterView<?> parent, View view, int position, long id) {
-                startImagePagerActivity(position);
-            }
-        });
+//        waterfallView.setOnItemClickListener(new PLA_AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(PLA_AdapterView<?> parent, View view, int position, long id) {
+//                startImagePagerActivity(position);
+//            }
+//        });
         waterfallView.setOnRefreshListener(RefreshListener());
+
+        TextView mainTitle = (TextView) findViewById(R.id.mainTitle);
+        mainTitle.setText(new SimpleDateFormat("MM月dd日").format(new Date()) + "最新图片");
     }
 
-    private void startImagePagerActivity(int position) {
-        Intent intent = new Intent(this, ImagePagerActivity.class);
-        intent.putParcelableArrayListExtra(Constants.Extra.IMAGES, images);
-        intent.putExtra(Constants.Extra.IMAGE_POSITION, position);
-        startActivity(intent);
-    }
 
     private MultiColumnPullToRefreshListView.OnRefreshListener RefreshListener() {
         return new MultiColumnPullToRefreshListView.OnRefreshListener() {

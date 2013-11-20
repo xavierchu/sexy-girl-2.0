@@ -5,23 +5,39 @@
     xmlns:baiduadsdk="http://schemas.android.com/apk/res/org.meepo.sexygirl"
     tools:context=".MainActivity" >
 
-   	<com.huewu.pla.lib.extra.MultiColumnPullToRefreshListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       />
-<!--
-    <com.baidu.mobads.AdView
-            android:id="@+id/adView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            baiduadsdk:adSize="0"
-            baiduadsdk:adId="debug_m0000001"/>
-
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>-->
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    android:text=""
+    android:id="@+id/mainTitle" />
+
+    <com.huewu.pla.lib.extra.MultiColumnPullToRefreshListView
+        android:id="@+id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp" />
+
+    <!--
+        <com.baidu.mobads.AdView
+                android:id="@+id/adView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                baiduadsdk:adSize="0"
+                baiduadsdk:adId="debug_m0000001"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>-->
+
+    <com.zhuamob.android.ZhuamobLayout
+        android:id="@+id/mj_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
     
 </RelativeLayout>
