@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
     android:text=""
+
     android:id="@+id/mainTitle" />
 
     <com.huewu.pla.lib.extra.MultiColumnPullToRefreshListView
@@ -17,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp" />
-
+        android:layout_marginBottom="40dp"
+        android:background="@android:color/white" />
     <!--
         <com.baidu.mobads.AdView
                 android:id="@+id/adView"
