@@ -64,7 +64,7 @@
                 android:value="624ba660ab6282ee77378359" />
         <service android:name="com.mj.MjService" />
         <activity
-                android:name="org.xchu.sexy.MainActivity"
+                android:name="org.xchu.sexy.CategoryActivity"
                 android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
