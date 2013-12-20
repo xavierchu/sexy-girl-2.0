@@ -92,7 +92,7 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
     class ThumbTask extends AsyncTask<String,Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
-            JSONArray images = ImageUrlsFinder.findImages();
+            JSONArray images = ImageUrlsFinder.findImages(0);
             List<String> urls = new ArrayList<String>();
             for(int i = 0, len = images.length(); i < len; i++) {
                 try {

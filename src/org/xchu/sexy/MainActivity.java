@@ -5,11 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
+import com.huewu.pla.lib.MultiColumnListView;
 import com.huewu.pla.lib.extra.MultiColumnPullToRefreshListView;
-import com.huewu.pla.lib.internal.PLA_AdapterView;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -21,29 +20,29 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.meepo.sexygirl.Constants;
 import org.meepo.sexygirl.Image;
-import org.meepo.sexygirl.ImagePagerActivity;
 import org.meepo.sexygirl.ImageUrlsFinder;
 import org.meepo.sexygirl.R;
 import org.xchu.sexy.adapter.WaterfallAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 
 public class MainActivity extends Activity {
 
     ArrayList<Image> images = new ArrayList<Image>();
+    int position = 0;
 
-    private MultiColumnPullToRefreshListView waterfallView;//可以把它当成一个listView
+    private MultiColumnListView waterfallView;//可以把它当成一个listView
     //如果不想用下拉刷新这个特性，只是瀑布流，可以用这个：MultiColumnListView 一样的用法
 
     @Override
-    protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        Bundle bundle = getIntent().getExtras();
+
+        position = bundle.getInt(Constants.Extra.IMAGE_POSITION, 0);
         // 加载图片URL列表
         new ThumbTask(new Callback() {
             @Override
@@ -76,41 +75,35 @@ public class MainActivity extends Activity {
                         .defaultDisplayImageOptions(defaultOptions).build();
         ImageLoader.getInstance().init(config);
 
-        waterfallView = (MultiColumnPullToRefreshListView) findViewById(R.id.list);
+        waterfallView = (MultiColumnListView) findViewById(R.id.list);
 
         WaterfallAdapter adapter = new WaterfallAdapter(images, MainActivity.this, getWindowManager().getDefaultDisplay());
         waterfallView.setAdapter(adapter);
-//        waterfallView.setOnItemClickListener(new PLA_AdapterView.OnItemClickListener() {
+//        waterfallView.setOnRefreshListener(RefreshListener());
+
+//        TextView mainTitle = (TextView) findViewById(R.id.mainTitle);
+//        mainTitle.setText(new SimpleDateFormat("MM月dd日").format(new Date()) + "最新图片");
+    }
+
+
+//    private MultiColumnPullToRefreshListView.OnRefreshListener RefreshListener() {
+//        return new MultiColumnPullToRefreshListView.OnRefreshListener() {
 //            @Override
-//            public void onItemClick(PLA_AdapterView<?> parent, View view, int position, long id) {
-//                startImagePagerActivity(position);
+//            public void onRefresh() {
+//                new ThumbTask(new Callback() {
+//                    @Override
+//                    public void doInFinished(Object o) {
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                waterfallView.onRefreshComplete();
+//                            }
+//                        });
+//                    }
+//                }).execute();
 //            }
-//        });
-        waterfallView.setOnRefreshListener(RefreshListener());
-
-        TextView mainTitle = (TextView) findViewById(R.id.mainTitle);
-        mainTitle.setText(new SimpleDateFormat("MM月dd日").format(new Date()) + "最新图片");
-    }
-
-
-    private MultiColumnPullToRefreshListView.OnRefreshListener RefreshListener() {
-        return new MultiColumnPullToRefreshListView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new ThumbTask(new Callback() {
-                    @Override
-                    public void doInFinished(Object o) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                waterfallView.onRefreshComplete();
-                            }
-                        });
-                    }
-                }).execute();
-            }
-        };
-    }
+//        };
+//    }
 
     class ThumbTask extends AsyncTask<String, Void, Void> {
 
@@ -125,7 +118,7 @@ public class MainActivity extends Activity {
 
         @Override
         protected Void doInBackground(String... params) {
-            JSONArray imagesJsons = ImageUrlsFinder.findImages();
+            JSONArray imagesJsons = ImageUrlsFinder.findImages(position);
             images.clear();
             for (int i = 0, len = imagesJsons.length(); i < len; i++) {
                 try {
@@ -134,12 +127,12 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
             }
-            Collections.sort(images, new Comparator<Image>() {
-                @Override
-                public int compare(Image image, Image image2) {
-                    return image.getPn().compareTo(image2.getPn());
-                }
-            });
+//            Collections.sort(images, new Comparator<Image>() {
+//                @Override
+//                public int compare(Image image, Image image2) {
+//                    return image.getPn().compareTo(image2.getPn());
+//                }
+//            });
             if (null != callback) {
                 callback.doInFinished(Void.TYPE);
             }
@@ -149,8 +142,6 @@ public class MainActivity extends Activity {
 
     interface Callback<T> {
         void doInFinished(T t);
-
-
     }
 
 }

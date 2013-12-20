@@ -5,19 +5,19 @@
     xmlns:baiduadsdk="http://schemas.android.com/apk/res/org.meepo.sexygirl"
     tools:context=".MainActivity" >
 
-    <TextView
+  <!--  <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
     android:text=""
 
-    android:id="@+id/mainTitle" />
+    android:id="@+id/mainTitle" />-->
 
-    <com.huewu.pla.lib.extra.MultiColumnPullToRefreshListView
+    <com.huewu.pla.lib.MultiColumnListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="40dp"
         android:background="@android:color/white" />
     <!--

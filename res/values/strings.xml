@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Activity titles -->
-    <string name="app_name">性感美女</string>
+    <string name="app_name">sx</string>
     <string name="ac_name_image_list">性感美女</string>
     <string name="ac_name_image_grid">性感美女</string>
     <string name="ac_name_image_pager">性感美女</string>
