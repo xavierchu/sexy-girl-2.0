@@ -15,12 +15,17 @@
  *******************************************************************************/
 package org.meepo.sexygirl;
 
+import android.app.WallpaperManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,6 +39,8 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -45,6 +52,10 @@ public class ImagePagerActivity extends BaseActivity {
 
 	DisplayImageOptions options;
 
+    ArrayList<Image> images;
+
+    int pagerPosition;
+
 	ViewPager pager;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,8 +64,8 @@ public class ImagePagerActivity extends BaseActivity {
 
 		Bundle bundle = getIntent().getExtras();
 
-		ArrayList<Image> images = getIntent().getParcelableArrayListExtra(Extra.IMAGES);
-		int pagerPosition = bundle.getInt(Extra.IMAGE_POSITION, 0);
+		images = getIntent().getParcelableArrayListExtra(Extra.IMAGES);
+		pagerPosition = bundle.getInt(Extra.IMAGE_POSITION, 0);
 
 		if (savedInstanceState != null) {
 			pagerPosition = savedInstanceState.getInt(STATE_POSITION);
@@ -79,11 +90,6 @@ public class ImagePagerActivity extends BaseActivity {
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putInt(STATE_POSITION, pager.getCurrentItem());
 	}
-
-    @Override
-    public void switchContent(ImageUrlsFinder.IMAGETYPE type) {
-
-    }
 
     private class ImagePagerAdapter extends PagerAdapter {
 
@@ -174,4 +180,51 @@ public class ImagePagerActivity extends BaseActivity {
 		public void startUpdate(View container) {
 		}
 	}
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_wallpaper:
+                setWallpaper(images.get(pagerPosition));
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void setWallpaper(final Image image) {
+        new AsyncTask<String,Void, Void>() {
+            @Override
+            protected Void doInBackground(String... strings) {
+                WallpaperManager wallpaperManager = WallpaperManager.getInstance(ImagePagerActivity.this);
+                try {
+                    URL url = new URL(image.getUrl());
+                    Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
+                    wallpaperManager.setBitmap(bitmap);
+                    ImagePagerActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ImagePagerActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ImagePagerActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ImagePagerActivity.this, "设置失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                return null;
+            }
+        }.execute();
+    }
 }

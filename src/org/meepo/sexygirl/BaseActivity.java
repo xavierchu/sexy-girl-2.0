@@ -28,32 +28,4 @@ public abstract class BaseActivity extends Activity {
 
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main_menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.item_jingyan:
-                switchContent(ImageUrlsFinder.IMAGETYPE.XINGAN);
-				return true;
-			case R.id.item_qingliang:
-                switchContent(ImageUrlsFinder.IMAGETYPE.QINGLIANG);
-				return true;
-            case R.id.item_wenyi:
-                switchContent(ImageUrlsFinder.IMAGETYPE.WENYI);
-                return true;
-            case R.id.item_suren:
-                switchContent(ImageUrlsFinder.IMAGETYPE.SUREN);
-                return true;
-			default:
-				return false;
-		}
-	}
-
-    public abstract void switchContent(ImageUrlsFinder.IMAGETYPE type);
-
 }

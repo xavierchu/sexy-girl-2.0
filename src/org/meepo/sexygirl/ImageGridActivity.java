@@ -155,14 +155,6 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 	}
 
     @Override
-    public void switchContent(ImageUrlsFinder.IMAGETYPE type) {
-        Intent intent = new Intent(this, ImageGridActivity.class);
-        intent.putExtra(Extra.TYPE, type.toString());
-        startActivity(intent);
-    }
-
-
-    @Override
     public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
