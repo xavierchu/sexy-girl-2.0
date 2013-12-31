@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="org.meepo.sexygirl"
-          android:versionCode="35"
+          android:versionCode="36"
           android:versionName="1.1.0">
 
     <uses-sdk
@@ -113,6 +113,6 @@
                 android:value="f4dbfd44"/>
         <meta-data
                 android:name="BaiduMobAd_APP_SEC"
-                android:value="f4dbfd44_13b50d6f"/>
+                android:value="f4dbfd44_cafc9297"/>
     </application>
 </manifest>
