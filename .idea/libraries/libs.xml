@@ -1,16 +1,14 @@
 <component name="libraryTable">
   <library name="libs">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/zhuamob_sdk_cnzz_v1.8.2_6.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/json-lib-2.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/Baidu_MobAds_SDK_3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/plasample.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/commons-beanutils-1.8.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/commons-lang-2.5.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/commons-logging-1.1.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/commons-collections-3.2.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/universal-image-loader-1.8.7-snapshot-with-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/Baidu_MobAds_SDK_Wall.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/Baidu_MobAds_SDK.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

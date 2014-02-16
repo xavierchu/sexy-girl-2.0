@@ -15,11 +15,15 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import org.meepo.sexygirl.Constants;
 import org.meepo.sexygirl.Image;
@@ -70,15 +74,26 @@ public class WaterfallAdapter extends BaseAdapter {
 			LayoutInflater inflater = LayoutInflater.from(activity);
 			view = inflater.inflate(R.layout.image_item, null);
 			holder.ivIcon = (ImageView) view.findViewById(R.id.row_icon);
+            holder.title = (TextView) view.findViewById(R.id.row_title);
 			holder.pbLoad = (ProgressBar) view.findViewById(R.id.pb_load);
 
 			view.setTag(holder);
 		} else {
 			holder = (Holder) view.getTag();
 		}
-		
-		String url = list.get(position).getThumbUrl();
-		ImageLoader.getInstance().displayImage(url, holder.ivIcon,
+
+        DisplayImageOptions options;
+        options = new DisplayImageOptions.Builder()
+                .cacheOnDisc(true)//图片存本地
+                .cacheInMemory(true)
+                .displayer(new FadeInBitmapDisplayer(50))
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .imageScaleType(ImageScaleType.NONE) // default
+                .build();
+
+        final Image image = list.get(position);
+        String url = image.getThumbUrl();
+		ImageLoader.getInstance().displayImage(url, holder.ivIcon, options,
 				new ImageLoadingListener() {
 					@Override
 					public void onLoadingStarted(String imageUri, View view) {
@@ -97,8 +112,8 @@ public class WaterfallAdapter extends BaseAdapter {
 						lp.height = (int) (imgHeight * hscale);
 						lp.width = (int) (imgWidth * wscale);
 						holder.ivIcon.setLayoutParams(lp);
-						
 						holder.ivIcon.setImageDrawable(drawable);
+//                        holder.title.setText(image.getAbs().length() > 20 ? image.getAbs().substring(0, 20) : image.getAbs());
 						holder.pbLoad.setVisibility(View.VISIBLE);
 					}
 
@@ -166,5 +181,6 @@ public class WaterfallAdapter extends BaseAdapter {
 
 class Holder {
 	public ImageView ivIcon;
+    public TextView title;
 	public ProgressBar pbLoad;
 }

@@ -6,12 +6,6 @@
                 xmlns:ns="http://mobwin.android.com/apk/res/org.meepo.sexygirl"
                 android:layout_height="fill_parent">
 
-        <com.zhuamob.android.ZhuamobLayout
-                android:id="@+id/mj_layout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"  />
-
         <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

@@ -2,30 +2,25 @@ package org.xchu.sexy;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.baidu.mobads.appoffers.OffersManager;
+import com.baidu.mobads.appoffers.PointsChangeListener;
 
 import org.meepo.sexygirl.Constants;
-import org.meepo.sexygirl.ImagePagerActivity;
 import org.meepo.sexygirl.R;
+import org.xchu.sexy.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +29,12 @@ import java.util.List;
  * Created by xiaoqi.zhu on 13-12-16.
  */
 public class CategoryActivity extends Activity {
+
+    static final int COL_HEIGHT = 70;
+
     ListView lv;
     List<String> list;
+    TextView tv;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +43,19 @@ public class CategoryActivity extends Activity {
         lv.setAdapter(new CategoryAdapter(this));
 //        lv.setBackgroundColor(0);
         Display display = this.getWindowManager().getDefaultDisplay();
-        int dividerHeight = ((display.getHeight() - 200) / list.size()) - 100;
+        int dividerHeight = (display.getHeight() - 100 - COL_HEIGHT * list.size()) / (list.size() + 2);
         lv.setDividerHeight(dividerHeight);
-        lv.setPadding(100, 100, 100, 100);
+        lv.setPadding(80, 50, 80, 50);
+
+        tv = (TextView) findViewById(R.id.textView);
+        tv.setText("当前积分：" + OffersManager.getPoints(CategoryActivity.this));
+
+        OffersManager.setPointsChangeListener(new PointsChangeListener() {
+                @Override
+            public void onPointsChanged(int points) {
+                tv.setText("当前积分：" + points);
+            }
+        });
     }
 
     private class CategoryAdapter extends BaseAdapter {
@@ -61,9 +70,11 @@ public class CategoryActivity extends Activity {
             list = new ArrayList<String>();
             list.add("宅男女神");
             list.add("网络美女");
-            list.add("性感诱惑");
+            list.add("性感尤物");
             list.add("唯美清纯");
-
+            list.add("美臀诱惑");
+            list.add("日本美女");
+            list.add("免费获取积分");
         }
 
         public int getCount() {
@@ -96,15 +107,15 @@ public class CategoryActivity extends Activity {
 
             // Bind the data efficiently with the holder.
             holder.text.setText(list.get(position));
-            holder.text.setTextSize(36);
+            holder.text.setTextSize(20);
             holder.text.setBackgroundColor(0x33ffffff);
             holder.text.setTextColor(0xeeff0048);
 //            holder.icon.setImageBitmap(list.get(position));
             Display display = context.getWindowManager().getDefaultDisplay();
             ViewGroup.LayoutParams para = holder.text.getLayoutParams();
 //            para.height = (display.getHeight() - 50) / list.size();
-            para.height = 100;
-            para.width = display.getWidth() - 200;
+            para.height = COL_HEIGHT;
+            para.width = display.getWidth() - 120;
 //            holder.icon.setLayoutParams(para);
 //            holder.icon.setScaleType(ImageView.ScaleType.FIT_XY);
             holder.text.setLayoutParams(para);
@@ -113,12 +124,10 @@ public class CategoryActivity extends Activity {
             holder.text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ConnectivityManager manager = (ConnectivityManager) CategoryActivity.this.getSystemService(CONNECTIVITY_SERVICE);
-                    NetworkInfo networkinfo = manager.getActiveNetworkInfo();
-                    if (networkinfo == null || !networkinfo.isAvailable()) {
-                        new AlertDialog.Builder(CategoryActivity.this).setMessage("没有可以使用的网络，请打开WIFI连接").setPositiveButton("Ok", null).show();
-                    } else {
+                    if (NetworkUtils.isNetConnected(CategoryActivity.this)) {
                         startMainActivity(position);
+                    } else {
+                        new AlertDialog.Builder(CategoryActivity.this).setMessage("没有可以使用的网络，请打开您的WIFI或3G网络").setPositiveButton("Ok", null).show();
                     }
                 }
             });
@@ -132,9 +141,32 @@ public class CategoryActivity extends Activity {
         }
 
         private void startMainActivity(int position) {
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra(Constants.Extra.IMAGE_POSITION, position);
-            context.startActivity(intent);
+            if(position == list.size() - 1) {
+                OffersManager.showOffers(CategoryActivity.this);
+            } else {
+                int points = OffersManager.getPoints(CategoryActivity.this);
+                if(position == 4 && points < 50) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(CategoryActivity.this, "需要50积分解锁，您的积分不足，请点击“获取积分”按钮获取积分。", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return;
+                }
+                if(position == 5 && points < 100) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(CategoryActivity.this, "需要100积分解锁，您的积分不足，请点击“获取积分”按钮获取积分。", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return;
+                }
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra(Constants.Extra.IMAGE_POSITION, position);
+                context.startActivity(intent);
+            }
         }
     }
 

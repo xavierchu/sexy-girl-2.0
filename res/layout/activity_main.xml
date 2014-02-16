@@ -21,24 +21,21 @@
         android:layout_marginBottom="40dp"
         android:background="@android:color/white" />
 
-        <com.baidu.mobads.AdView
-                android:id="@+id/adView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                baiduadsdk:adSize="0"
-                baiduadsdk:adId="debug_m0000001"/>
+    <com.baidu.mobads.AdView
+        android:id="@+id/adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        baiduadsdk:adSize="0"
+        baiduadsdk:adId=""/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-    <!--
-        <com.zhuamob.android.ZhuamobLayout
-            android:id="@+id/mj_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            />-->
-    
+
 </RelativeLayout>
